@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="../css/todo.css">
+</head>
+
+
+<body>
+
+  <div class="container">
+    <div class="card position-absolute top-50 start-50 translate-middle" style="min-height: 70%; min-width: 50%;">
+
+      <!-- TITLE -->
+      <div class="card-header">
+        ToDo List
+      </div>
+
+      <!-- CARD BODY -->
+      <div class="card-body">
+        <div class="container px-0">
+
+          <!-- IN PROGRESS TASKS -->
+          <h5>In Progress</h5>
+          <div id="pgrs_list">
+            <!-- LIST HERE -->
+            <div id="task-${id}" class="row g-0 border rounded-3 my-1" style="min-width: 510px;">
+
+              <div class="col-1 position-relative">
+                <button id="${id}" name="btn-${id}"
+                  class="position-absolute top-50 start-50 translate-middle empty-circle"
+                  onclick="updateStatus(`${id}`)"></button>
+              </div>
+
+              <div class="col-6 ps-1 align-self-center">
+                <p id="task-title-${id}" class="my-2" style="font-size: 15px;">This is the task</p>
+              </div>
+
+              <div class="col-2 align-self-center">
+                <p class="text-end my-2" style="font-size: 15px;">Due Date:
+                </p>
+              </div>
+              <div class="col-2 align-self-center">
+                <p id="due-date-id" class="text-center my-2" style="font-size: 15px;">11</p>
+              </div>
+              <div class="col-1 align-self-center text-center ms-auto">
+                <button id="info-btn-${id}" name="btn-${id}" type="button"
+                  class="info-btn my-2" data-bs-toggle="collapse"
+                  data-bs-target="#collapse-id" aria-expanded="false" aria-controls="collapse-id"></button>
+              </div>
+
+              <div class="collapse" id="collapse-id">
+                <div id="collapse-body-id" class="card-body">
+
+                  <p class="my-0">
+                    Description:
+                  </p>
+                  <p id="description-value-id" class="my-0">
+                    Some placeholder content for the collapse component. This panel is hidden by default but revealed
+                    when
+                    the user activates the relevant trigger.
+                  </p>
+                  <div class="row justify-content-end">
+                    <div class="col-2 text-end">
+                      <button class="edit-info-btn" onclick="editTask()">
+
+                      </button>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            
+          </div>
+        </div class="row">
+
+        <!-- TASK ADD BUTTON -->
+        <div class="container px-0" id="getTaskDetails">
+          <button id="add_task" onclick="requestTaskInput()" class="btn btn-light">+</button>
+        </div>
+
+        <!-- COMPLETE TASKS -->
+        <div class="container px-0">
+          <h5>Complete</h5>
+          <div id="cmplt_list">
+            <!-- LIST HERE -->
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <script src="../js/todo.js"></script>
+</body>
+
+
+</html>

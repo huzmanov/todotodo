@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="./public/css/todo.css">
+</head>
+
+<body>
+
+  <div class="container px-0" id="getTaskDetails">
+    <div class="px-4 bg-light-subtle border border-2 border-light my-2 rounded-4">
+      <div class="row">
+
+        <p class="mb-0 mrg-t">Title</p>
+        <div class="col mxw-50">
+          <input id="cl_title" type="text" class="form-control" name="Title" aria-describedby="addon-wrapping">
+        </div>
+
+        <p class="mb-0 mrg-t">Description</p>
+        <div class=" mxw-75">
+          <input id="cl_description" type="text" class="form-control" name="Description"
+            aria-describedby="addon-wrapping">
+        </div>
+
+        <p class="mb-0 mrg-t">Due Date</p>
+        <div class="col mxw-25">
+          <input id="cl_dueDate" type="date" class="form-control" name="Due Date" aria-describedby="addon-wrapping">
+        </div>
+
+        <p></p>
+        <div class="col pb-2 pe-10 d-flex justify-content-end">
+          <button id="sendInput" class="btn btn-secondary" onclick="sendInputToData()">Add Task</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <script src="./public/js/todo.js"></script>
+
+
+</body>
+
+</html>

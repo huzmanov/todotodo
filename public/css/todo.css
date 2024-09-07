@@ -1,0 +1,71 @@
+.empty-circle {
+  height: 22px;
+  width: 22px;
+  background-color:white;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+  border-radius: 50%;
+}
+
+.complete-circle {
+  height: 22px;
+  width: 22px;
+  background-color:green;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+  border-radius: 50%;
+}
+
+.mxw-75 {
+  max-width: 75%;
+}
+
+.mxw-50 {
+  max-width: 50%;
+}
+
+.mxw-25 {
+  max-width: 25%;
+}
+
+.mrg-t {
+  margin-top: 1rem;
+}
+
+.pe-10{
+  padding-right: 2rem;
+}
+
+.font-1 {
+  --bs-body-font-size: .8rem;
+}
+
+.info-btn {
+  background-image: url('../Images/info.png');
+  background-color: white;
+  background-size: 25px;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 25px;
+  width: 25px;
+  border: none;
+  padding: 0;
+
+}
+
+.edit-info-btn {
+  background-image: url('../Images/edit.png');
+  background-color: white;
+  background-size: 25px;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  height: 25px;
+  width: 25px;
+}
+
+.info-container {
+  border: none;
+}
