@@ -61,8 +61,8 @@ function sortData(data) {
           </div>
         </div>`
 
- 
-      htmlArray.push(task_html);
+
+    htmlArray.push(task_html);
 
   });
 
@@ -71,9 +71,6 @@ function sortData(data) {
 
 
 // Retrieve Complete List
-// Retrieve Complete List
-// Retrieve Complete List
-
 function getCompleteList() {
 
   $.ajax({
@@ -93,9 +90,6 @@ function getCompleteList() {
 }
 
 // Retrieve Progress List
-// Retrieve Progress List
-// Retrieve Progress List
-
 function getProgressList() {
 
   $.ajax({
@@ -115,8 +109,6 @@ function getProgressList() {
 }
 
 
-// Request input from the client to add task
-// Request input from the client to add task
 // Request input from the client to add task
 function requestTaskInput() {
 
@@ -149,8 +141,6 @@ function requestTaskInput() {
 }
 
 // Store data that is being entered by the client to the database
-// Store data that is being entered by the client to the database
-// Store data that is being entered by the client to the database
 function sendInputToData() {
 
   const title = document.querySelector('#cl_title').value
@@ -179,15 +169,11 @@ function sendInputToData() {
 }
 
 //Deletes prompt section
-//Deletes prompt section
-//Deletes prompt section
 function deletePrompt() {
   document.getElementById('getTaskDetails').innerHTML = '<button id="add_task" onclick="requestTaskInput()" class="btn btn-light">+</button>'
 }
 
 
-// Updates the status of task
-// Updates the status of task
 // Updates the status of task
 function updateStatus(id) {
 
@@ -244,8 +230,6 @@ function updateStatus(id) {
 
 
 //Asks for input to edit task
-//Asks for input to edit task
-//Asks for input to edit task
 function editTask(id) {
   let collapse_body = document.getElementById(`collapse-body-${id}`)
   let description_value = document.getElementById(`description-value-${id}`).innerText
@@ -284,8 +268,6 @@ function editTask(id) {
 
 
 // UPDATE TASK FROM INPUT
-// UPDATE TASK FROM INPUT
-// UPDATE TASK FROM INPUT
 function updateTask(id) {
   let collapse_body = document.getElementById(`collapse-body-${id}`)
   let send_title = collapse_body.querySelector('#cl_title').value
@@ -299,38 +281,24 @@ function updateTask(id) {
     contentType: 'application/json',
     data: JSON.stringify({ id: id, send_title: send_title, send_description: send_description, send_dueDate: send_dueDate }),
     success: function (data) {
-      console.log('Task uploaded:' + data)
-
+      document.getElementById('pgrs_list').innerHTML = ''
+      document.getElementById('cmplt_list').innerHTML = ''
+      getCompleteList()
+      getProgressList()
     },
     error: function (request, error) {
       console.log("Request: " + JSON.stringify(request));
     },
   })
 
-  console.log('this is it', data_one)
-  collapse_body.innerHTML = ''
 }
-
-
-
-function retrieveLatestId() {
-  $.ajax({
-    url: 'http://localhost:3000/todo_latest',
-    type: 'GET',
-    dataType: 'json',
-    success: function (data) {
-      let task_html = sortData(data)
-      document.getElementById('pgrs_list').innerHTML += task_html;
-    },
-    error: function (request, error) {
-      console.log("Request: " + JSON.stringify(request));
-    }
-  })
-}
-
 
 function cancelEdit() {
   // need to do get my todos for this specific task so it does not update the html
+  document.getElementById('pgrs_list').innerHTML = ''
+  document.getElementById('cmplt_list').innerHTML = ''
+  getCompleteList()
+  getProgressList()
 }
 
 document.addEventListener('DOMContentLoaded', function () {
