@@ -1,84 +1,118 @@
+function sortData(data) {
+  let htmlArray = [];
 
-function getMyTodos() {
+  data.forEach(task => {
+
+    let id = task.id;
+    let title = task.title;
+    let description = task.description;
+    let status = task.status;
+    let creation_date = task.creation_date;
+    let due_date = task.due_date;
+    let last_modified_date = task.last_modified_date;
+
+    if (status == 'Complete') {
+      var circle = 'complete-circle'
+    }
+    else if (status == 'In-Progress') {
+      var circle = 'empty-circle'
+    }
+
+    var task_html =
+      `<div id="task-${id}" class="row g-0 border rounded-3 my-1" style="min-width: 510px;">
+
+          <div class="col-1 position-relative">
+            <button id="${id}" name="btn-${id}"
+              class="position-absolute top-50 start-50 translate-middle ${circle}"
+              onclick="updateStatus('${id}')"></button>
+          </div>
+          <div class="col-6 ps-1 align-self-center">
+            <p id="task-title-${id}" class="my-2" style="font-size: 15px;">${title}</p>
+          </div>
+          <div class="col-2 align-self-center">
+            <p class="text-end my-2" style="font-size: 15px;">Due Date:
+            </p>
+          </div>
+          <div class="col-2 align-self-center">
+            <p id="due-date-${id}" class="text-center my-2" style="font-size: 15px;">${due_date}</p>
+          </div>
+          <div class="col-1 align-self-center text-center ms-auto">
+            <button id="info-${id}" name="info-btn-${id}" type="button"
+              class="info-btn my-2" data-bs-toggle="collapse"
+              data-bs-target="#collapse-${id}" aria-expanded="false" aria-controls="collapse-${id}"></button>
+          </div>
+
+          <div class="collapse" id="collapse-${id}">
+            <div id="collapse-body-${id}" class="card-body">
+
+              <p class="my-0">
+                Description:
+              </p>
+              <p id="description-value-${id}" class="my-0">
+                ${description}
+              </p>
+              <div class="row justify-content-end">
+                <div class="col-2 text-end">
+                  <button class="edit-info-btn" onclick="editTask('${id}')">
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>`
+
+ 
+      htmlArray.push(task_html);
+
+  });
+
+  return htmlArray;
+}
+
+
+// Retrieve Complete List
+// Retrieve Complete List
+// Retrieve Complete List
+
+function getCompleteList() {
+
   $.ajax({
 
-    url: 'http://localhost:3000/todo',
+    url: 'http://localhost:3000/completedtasks',
     type: 'GET',
     dataType: 'json',
     success: function (data) {
-      // console.log('Data: ' + data);
-      data.forEach(task => {
-        // console.log(task)
-        let id = task.id;
-        let title = task.title;
-        let description = task.description;
-        let status = task.status;
-        let creation_date = task.creation_date;
-        let due_date = task.due_date;
-        let last_modified_date = task.last_modified_date;
-
-        var task_html =
-          `<div id="task-${id}" class="row g-0 border rounded-3 my-1" style="min-width: 510px;">
-
-              <div class="col-1 position-relative">
-                <button id="${id}" name="btn-${id}"
-                  class="position-absolute top-50 start-50 translate-middle empty-circle"
-                  onclick="updateStatus('${id}')"></button>
-              </div>
-              <div class="col-6 ps-1 align-self-center">
-                <p id="task-title-${id}" class="my-2" style="font-size: 15px;">${title}</p>
-              </div>
-              <div class="col-2 align-self-center">
-                <p class="text-end my-2" style="font-size: 15px;">Due Date:
-                </p>
-              </div>
-              <div class="col-2 align-self-center">
-                <p id="due-date-${id}" class="text-center my-2" style="font-size: 15px;">${due_date}</p>
-              </div>
-              <div class="col-1 align-self-center text-center ms-auto">
-                <button id="info-${id}" name="info-btn-${id}" type="button"
-                  class="info-btn my-2" data-bs-toggle="collapse"
-                  data-bs-target="#collapse-${id}" aria-expanded="false" aria-controls="collapse-${id}"></button>
-              </div>
-
-              <div class="collapse" id="collapse-${id}">
-                <div id="collapse-body-${id}" class="card-body">
-
-                  <p class="my-0">
-                    Description:
-                  </p>
-                  <p id="description-value-${id}" class="my-0">
-                    ${description}
-                  </p>
-                  <div class="row justify-content-end">
-                    <div class="col-2 text-end">
-                      <button class="edit-info-btn" onclick="editTask('${id}')">
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>`
-
-
-        if (status == 'Complete') {
-          document.getElementById("cmplt_list").innerHTML += task_html;
-          document.getElementById(`${id}`).classList.add('complete-circle');
-        }
-        else if (status == 'In-Progress') {
-          document.getElementById("pgrs_list").innerHTML += task_html;
-          document.getElementById(`${id}`).classList.add('empty-circle');
-        }
-
-      });
+      let task_html = sortData(data);
+      document.getElementById("cmplt_list").innerHTML = task_html.join('');
     },
     error: function (request, error) {
       console.log("Request: " + JSON.stringify(request));
     }
-  });
+  })
 
 }
 
+// Retrieve Progress List
+// Retrieve Progress List
+// Retrieve Progress List
+
+function getProgressList() {
+
+  $.ajax({
+
+    url: 'http://localhost:3000/progresstasks',
+    type: 'GET',
+    dataType: 'json',
+    success: function (data) {
+      let task_html = sortData(data);
+      document.getElementById("pgrs_list").innerHTML = task_html.join('');
+    },
+    error: function (request, error) {
+      console.log("Request: " + JSON.stringify(request));
+    }
+  })
+
+}
 
 
 // Request input from the client to add task
@@ -142,10 +176,6 @@ function sendInputToData() {
   var backToButton = `<button id="add_task" onclick="requestTaskInput()" class="btn btn-light">+</button>`
   document.getElementById('getTaskDetails').innerHTML = backToButton
 
-  // document.getElementById('pgrs_list').innerHTML = ''
-  // document.getElementById('cmplt_list').innerHTML = ''
-  // getMyTodos()
-
 }
 
 //Deletes prompt section
@@ -175,12 +205,12 @@ function updateStatus(id) {
       contentType: 'application/json',
       data: JSON.stringify({ id }),
       success: function (data) {
-        // console.log('Data uploaded:' + data)
         cls.remove('empty-circle');
         cls.add('complete-circle');
         document.getElementById('pgrs_list').innerHTML = ''
         document.getElementById('cmplt_list').innerHTML = ''
-        getMyTodos()
+        getCompleteList()
+        getProgressList()
       },
       error: function (request, error) {
         console.log("Request: " + JSON.stringify(request));
@@ -197,12 +227,12 @@ function updateStatus(id) {
       contentType: 'application/json',
       data: JSON.stringify({ id }),
       success: function (data) {
-        // console.log('Data uploaded:' + data)
         cls.remove('complete-circle');
         cls.add('empty-circle');
         document.getElementById('cmplt_list').innerHTML = ''
         document.getElementById('pgrs_list').innerHTML = ''
-        getMyTodos()
+        getProgressList()
+        getCompleteList()
       },
       error: function (request, error) {
         console.log("Request: " + JSON.stringify(request));
@@ -221,9 +251,7 @@ function editTask(id) {
   let description_value = document.getElementById(`description-value-${id}`).innerText
   let title_value = document.getElementById(`task-title-${id}`).innerText
   let due_date = document.getElementById(`due-date-${id}`).innerText
-  // console.log('Title:', title_value)
-  // console.log('Description:', description_value)
-  // console.log('Due Date:', due_date)
+
   let request_input =
     `<div class="px-4 bg-light-subtle border border-2 border-light my-2 rounded-4">
   <div class="row">
@@ -272,6 +300,7 @@ function updateTask(id) {
     data: JSON.stringify({ id: id, send_title: send_title, send_description: send_description, send_dueDate: send_dueDate }),
     success: function (data) {
       console.log('Task uploaded:' + data)
+
     },
     error: function (request, error) {
       console.log("Request: " + JSON.stringify(request));
@@ -290,99 +319,14 @@ function retrieveLatestId() {
     type: 'GET',
     dataType: 'json',
     success: function (data) {
-      data.forEach(task => {
-        let id = task.id;
-        let title = task.title;
-        let description = task.description;
-        let status = task.status;
-        let creation_date = task.creation_date;
-        let due_date = task.due_date;
-        let last_modified_date = task.last_modified_date;
-
-        var task_html =
-          `<div id="task-${id}" class="row g-0 border rounded-3 my-1" style="min-width: 510px;">
-
-              <div class="col-1 position-relative">
-                <button id="${id}" name="btn-${id}"
-                  class="position-absolute top-50 start-50 translate-middle empty-circle"
-                  onclick="updateStatus("${id}")"></button>
-              </div>
-              <div class="col-6 ps-1 align-self-center">
-                <p id="task-title-${id}" class="my-2" style="font-size: 15px;">${title}</p>
-              </div>
-              <div class="col-2 align-self-center">
-                <p class="text-end my-2" style="font-size: 15px;">Due Date:
-                </p>
-              </div>
-              <div class="col-2 align-self-center">
-                <p id="due-date-${id}" class="text-center my-2" style="font-size: 15px;">${due_date}</p>
-              </div>
-              <div class="col-1 align-self-center text-center ms-auto">
-                <button id="info-${id}" name="info-btn-${id}" type="button"
-                  class="info-btn my-2" data-bs-toggle="collapse"
-                  data-bs-target="#collapse-${id}" aria-expanded="false" aria-controls="collapse-${id}"></button>
-              </div>
-
-              <div class="collapse" id="collapse-${id}">
-                <div id="collapse-body-${id}" class="card-body">
-
-                  <p class="my-0">
-                    Description:
-                  </p>
-                  <p id="description-value-${id}" class="my-0">
-                    ${description}
-                  </p>
-                  <div class="row justify-content-end">
-                    <div class="col-2 text-end">
-                      <button class="edit-info-btn" onclick="editTask('${id}')">
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>`
-        document.getElementById("pgrs_list").innerHTML += task_html;
-
-      })
+      let task_html = sortData(data)
+      document.getElementById('pgrs_list').innerHTML += task_html;
     },
     error: function (request, error) {
       console.log("Request: " + JSON.stringify(request));
     }
   })
 }
-
-//------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// GET INFO FOR ONE ROW
-// GET INFO FOR ONE ROW
-// GET INFO FOR ONE ROW
-function getOneToDo(id) {
-
-  $.ajax({
-    url: 'http://localhost:3000/todo_one',
-    type: 'POST',
-    dataType: 'json',
-    contentType: 'application/json',
-    data: JSON.stringify({ id: id }),
-    success: function (data_one) {
-      return data_one
-      // data.forEach(task => {
-      //   // let identifier = task.id
-      //   // let title = task.title;
-      //   // let description = task.description;
-      //   // let status = task.status;
-      //   // let creation_date = task.creation_date;
-      //   // let due_date = task.due_date;
-      //   // let last_modified_date = task.last_modified_date;
-      // })
-    },
-    error: function (request, error) {
-      console.log("Request: " + JSON.stringify(request));
-    }
-  })
-}
-//------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
 
 
 function cancelEdit() {
@@ -390,7 +334,9 @@ function cancelEdit() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  getMyTodos()
+  // getMyTodos()
+  getCompleteList()
+  getProgressList()
   console.log('Document finished loading');
 })
 

@@ -25,27 +25,36 @@ app.get('/', function (request, response) {
 });
 
 
-// GET ALL TODOS
-// GET ALL TODOS
-// GET ALL TODOS
-app.get('/todo', json, (request, response) => {
-  // response.setHeader("Access-Control-Allow-Origin", '*')
-  const query = `SELECT * FROM TODO ORDER BY LAST_MODIFIED_DATE`
+
+// GET LIST OF COMPLETE TASKS
+// GET LIST OF COMPLETE TASKS
+// GET LIST OF COMPLETE TASKS
+
+app.get('/completedtasks', json, (request, response) => {
+  const query = `SELECT * FROM TODO WHERE STATUS = 'Complete' order by due_date`
   db.any(query)
     .then((data) => {
       response.json(data)
-      // data.forEach(task => {
-      //   if (identifier.includes(task.id) === false) {
-      //     identifier.splice(0, 0, task.id)
-      //   }
-      // })
-      // console.log('ids:', identifier)
     })
     .catch((error) => {
-      console.log('ERROR:', error)
+      console.log('Error:', error)
     })
 })
 
+// GET LIST OF PROGRESS TASKS
+// GET LIST OF PROGRESS TASKS
+// GET LIST OF PROGRESS TASKS
+
+app.get('/progresstasks', json, (request, response) => {
+  const query = `SELECT * FROM TODO WHERE STATUS = 'In-Progress' order by due_date`
+  db.any(query)
+    .then((data) => {
+      response.json(data)
+    })
+    .catch((error) => {
+      console.log('Error:', error)
+    })
+})
 
 //SELECT LATEST ADDED TODO
 //SELECT LATEST ADDED TODO
@@ -67,7 +76,6 @@ app.get('/todo_latest', json, (request, response) => {
 //INSERT NEW TASK
 //INSERT NEW TASK
 app.post('/todo', (request, response) => {
-
 
   const id = short_uuid.generate()
   const title = request.body.title
