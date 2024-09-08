@@ -2,9 +2,8 @@ const express = require('express')
 const app = express()
 const port = 3000
 const pgp = require('pg-promise')();
-const db = pgp({
-  connectionString: process.env.DATABASE_URL,
-})
+const dbUrl = process.env.DATABASE_URL;
+const db = pgp(dbUrl);
 // const db = pgp('postgres://husmanov:password@localhost:5432/spark')
 const path = require('path');
 const cors = require('cors');
