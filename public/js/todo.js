@@ -1,3 +1,5 @@
+const apiUrl = 'https://your-api-name.onrender.com'
+
 function sortData(data) {
   let htmlArray = [];
 
@@ -75,7 +77,7 @@ function getCompleteList() {
 
   $.ajax({
 
-    url: 'http://localhost:3000/completedtasks',
+    url: `${apiUrl}/completedtasks`,
     type: 'GET',
     dataType: 'json',
     success: function (data) {
@@ -94,7 +96,7 @@ function getProgressList() {
 
   $.ajax({
 
-    url: 'http://localhost:3000/progresstasks',
+    url: `${apiUrl}/progresstasks`,
     type: 'GET',
     dataType: 'json',
     success: function (data) {
@@ -149,7 +151,7 @@ function sendInputToData() {
 
   $.ajax({
 
-    url: 'http://localhost:3000/todo',
+    url: `${apiUrl}/todo`,
     type: 'POST',
     dataType: 'json',
     contentType: 'application/json',
@@ -188,7 +190,7 @@ function updateStatus(id) {
   if (cls.contains('empty-circle')) {
     $.ajax({
 
-      url: 'http://localhost:3000/statuscomplete',
+      url: `${apiUrl}/statuscomplete`,
       type: 'POST',
       dataType: 'json',
       contentType: 'application/json',
@@ -210,7 +212,7 @@ function updateStatus(id) {
   if (cls.contains('complete-circle')) {
     $.ajax({
 
-      url: 'http://localhost:3000/statusinprogress',
+      url: `${apiUrl}/statusinprogress`,
       type: 'POST',
       dataType: 'json',
       contentType: 'application/json',
@@ -278,7 +280,7 @@ function updateTask(id) {
   let send_dueDate = collapse_body.querySelector('#cl_dueDate').value
 
   $.ajax({
-    url: 'http://localhost:3000/update_task',
+    url: `${apiUrl}/update_task`,
     type: 'POST',
     dataType: 'json',
     contentType: 'application/json',
