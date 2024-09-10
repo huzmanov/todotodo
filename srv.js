@@ -26,7 +26,10 @@ const json = bp.json()
 // Serve html file to server
 // Link: https://www.digitalocean.com/community/tutorials/use-expressjs-to-deliver-html-files
 
-app.use(cors()); //Enable CORS for all origins
+//Enable CORS for all origins
+app.use(cors({
+  origin: 'https://todotodo-13yf.onrender.com'
+})); 
 app.use(express.static('./public'));
 app.use(bp.json());
 
