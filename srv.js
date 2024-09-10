@@ -30,11 +30,12 @@ const json = bp.json()
 app.use(cors({
   origin: 'https://todotodo-13yf.onrender.com'
 })); 
+
 app.use(express.static('./public'));
 app.use(bp.json());
 
 app.get('/', function (request, response) {
-  // response.setHeader("Access-Control-Allow-Origin", '*')
+  response.setHeader("Access-Control-Allow-Origin", '*')
   response.sendFile(path.join(__dirname, './public/html/todo.html'));
 });
 
