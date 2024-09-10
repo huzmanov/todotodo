@@ -12,14 +12,14 @@ const Password = process.env.PG_PASSWORD
 const Host = process.env.PG_HOST
 const Port = process.env.PG_PORT 
 
-console.log('Database:', DataBase)
-console.log('Username:', UserName)
-console.log('Password:', Password)
-console.log('Host:', Host)
-console.log('Port:', Port)
+console.log('pgpg:', `postgresql://${UserName}:${Password}@${Host}:${Port}/${DataBase}?ssl=true`)
+
+'postgres://todotodo_database_user:O5RDn7g1yM7Xs2vG8gzyVrQPs0bAFmb2@'
+
+'postgresql://todotodo_database_user  : O5RDn7g1yM7Xs2vG8gzyVrQPs0bAFmb2  @ dpg-crf2bi8gph6c73f0ogn0-a.oregon-postgres.render.com : 5432 /todotodo_database'
 
 // const db = pgp('postgres://husmanov:password@localhost:5432/spark')
-const db = pgp(`postgres://${UserName}:${Password}@${Host}:${Port}/${DataBase}`);
+const db = pgp(`postgresql://${UserName}:${Password}@${Host}:${Port}/${DataBase}?ssl=true`);
 
 const path = require('path');
 const cors = require('cors');
