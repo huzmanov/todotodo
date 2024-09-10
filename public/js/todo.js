@@ -156,7 +156,10 @@ function sendInputToData() {
     data: JSON.stringify({ title: title, description: description, due_date: due_date }),
     success: function (data) {
       console.log('Data uploaded:' + data)
-      retrieveLatestId()
+      document.getElementById('pgrs_list').innerHTML = ''
+      document.getElementById('cmplt_list').innerHTML = ''
+      getCompleteList()
+      getProgressList()
     },
     error: function (request, error) {
       console.log("Request: " + JSON.stringify(request));
