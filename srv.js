@@ -2,9 +2,24 @@ const express = require('express')
 const app = express()
 const port = 3000
 const pgp = require('pg-promise')();
-const dbUrl = process.env.DATABASE_URL;
-const db = pgp(dbUrl);
+
+const poolConfig = {
+  max: 5,
+  min: 2,
+  idleTimeoutMillis:60000,
+}
+
+const DataBase = process.env.PG_DATABASE
+const UserName = process.env.PG_USER
+const Password = process.env.PG_PASSWORD
+const Host = process.env.PG_HOST
+const Port = process.env.PG_PORT 
+
+poolConfig.connectionString = `postgres://${UserName}: ${Password}@${Host}:${Port}/${DataBase}`;
+
 // const db = pgp('postgres://husmanov:password@localhost:5432/spark')
+const db = pgp(poolConfig);
+
 const path = require('path');
 const cors = require('cors');
 const short_uuid = require('short-uuid');
