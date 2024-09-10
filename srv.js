@@ -10,7 +10,7 @@ const DataBase = process.env.PG_DATABASE
 const UserName = process.env.PG_USER
 const Password = process.env.PG_PASSWORD
 const Host = process.env.PG_HOST
-const Port = process.env.PG_PORT 
+const Port = process.env.PG_PORT
 
 const db = pgp(`postgresql://${UserName}:${Password}@${Host}:${Port}/${DataBase}?ssl=true`);
 
@@ -27,14 +27,16 @@ const json = bp.json()
 // Link: https://www.digitalocean.com/community/tutorials/use-expressjs-to-deliver-html-files
 
 //Enable CORS for all origins
-// app.use(cors({
-//   origin: 'https://todotodo-13yf.onrender.com'
-// })); 
+app.use(cors({
+  origin: 'https://todotodo-13yf.onrender.com',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'HEAD'],
+  allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept']
+}));
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "https://todotodo-13yf.onrender.com"); // update to match the domain you will make the request from
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-});
+// app.use(cors(request, response) => {
+//   response.header("Access-Control-Allow-Origin", "https://todotodo-13yf.onrender.com"); // update to match the domain you will make the request from
+//   response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+// });
 
 
 app.use(express.static('./public'));
