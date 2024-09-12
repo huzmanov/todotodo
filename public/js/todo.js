@@ -1,4 +1,6 @@
-const apiUrl = 'https://todotodo-13yf.onrender.com'
+require('dotenv').config();
+
+const apiUrl = process.env.proUrl
 
 function sortData(data) {
   let htmlArray = [];
