@@ -5,8 +5,6 @@ const pgp = require('pg-promise')();
 
 require('dotenv').config();
 
-const apiUrl = process.env.devUrl
-
 const DataBase = process.env.PG_DATABASE
 const UserName = process.env.PG_USER
 const Password = process.env.PG_PASSWORD
