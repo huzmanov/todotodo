@@ -30,7 +30,7 @@ app.use(cors())
 app.use(express.static('./public'));
 app.use(bp.json());
 
-app.get('/', (request, response) => {
+app.get('/', function (request, response) {
   response.setHeader("Access-Control-Allow-Origin", '*')
   response.sendFile(path.join(__dirname, './public/html/todo.html'));
   // response.json({ apiUrl: process.env.devUrl });
