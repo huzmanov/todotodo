@@ -1,4 +1,4 @@
-const apiUrl = "https://todo-dev-1wil.onrender.com"
+const apiUrl = 'https://todo-dev-1wil.onrender.com'
 
 function sortData(data) {
   let htmlArray = [];
@@ -85,8 +85,7 @@ function getCompleteList() {
       document.getElementById("cmplt_list").innerHTML = task_html.join('');
     },
     error: function (request, error) {
-      // console.log("Request: " + JSON.stringify(request));
-      console.log(apiUrl)
+      console.log("Request: " + JSON.stringify(request));
     }
   })
 
