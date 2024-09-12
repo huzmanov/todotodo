@@ -32,17 +32,12 @@ app.use(cors())
 app.use(express.static('./public'));
 app.use(bp.json());
 
-// app.get('/', (request, response) {
-//   response.setHeader("Access-Control-Allow-Origin", '*')
-//   response.sendFile(path.join(__dirname, './public/html/todo.html'));
-// });
-
-// SERVE URLS TO FRONTEND
-// SERVE URLS TO FRONTEND
-// SERVE URLS TO FRONTEND
 app.get('/', (request, response) => {
-  response.json({ apiUrl: process.env.devUrl });
+  response.setHeader("Access-Control-Allow-Origin", '*')
+  response.sendFile(path.join(__dirname, './public/html/todo.html'));
+  // response.json({ apiUrl: process.env.devUrl });
 });
+
 
 // GET LIST OF COMPLETE TASKS
 // GET LIST OF COMPLETE TASKS

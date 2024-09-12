@@ -1,18 +1,4 @@
-async function getAPIUrl() {
-  try {
-    const response = await fetch('/', {
-      method: 'GET',
-    });
-    const data = await response.json();
-    console.log(data)
-  }
-  catch (error) {
-    console.log('Error fetching API Url:', error);
-  }
-}
-
-const apiUrl = getAPIUrl(data)
-
+const apiUrl = "https://todo-dev-1wil.onrender.com"
 
 function sortData(data) {
   let htmlArray = [];
@@ -99,7 +85,8 @@ function getCompleteList() {
       document.getElementById("cmplt_list").innerHTML = task_html.join('');
     },
     error: function (request, error) {
-      console.log("Request: " + JSON.stringify(request));
+      // console.log("Request: " + JSON.stringify(request));
+      console.log(apiUrl)
     }
   })
 
