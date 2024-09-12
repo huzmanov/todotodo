@@ -1,6 +1,18 @@
-require('../../node_modules/dotenv').config();
+async function getAPIUrl() {
+  try {
+    const response = await fetch('/', {
+      method: 'GET',
+    });
+    const data = await response.json();
+    console.log(data)
+  }
+  catch (error) {
+    console.log('Error fetching API Url:', error);
+  }
+}
 
-const apiUrl = process.env.devUrl
+const apiUrl = getAPIUrl(data)
+
 
 function sortData(data) {
   let htmlArray = [];

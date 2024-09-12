@@ -5,6 +5,7 @@ const pgp = require('pg-promise')();
 
 require('dotenv').config();
 
+const apiUrl = process.env.devUrl
 
 const DataBase = process.env.PG_DATABASE
 const UserName = process.env.PG_USER
@@ -26,28 +27,22 @@ const json = bp.json()
 // Serve html file to server
 // Link: https://www.digitalocean.com/community/tutorials/use-expressjs-to-deliver-html-files
 
-//Enable CORS for all origins
-// app.use(cors({
-//   origin: 'https://todotodo-13yf.onrender.com',
-//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'HEAD'],
-//   allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept']
-// }));
-
-// app.use(cors(request, response) => {
-//   response.header("Access-Control-Allow-Origin", "https://todotodo-13yf.onrender.com"); // update to match the domain you will make the request from
-//   response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-// });
 app.use(cors())
 
 app.use(express.static('./public'));
 app.use(bp.json());
 
-app.get('/', function (request, response) {
-  response.setHeader("Access-Control-Allow-Origin", '*')
-  response.sendFile(path.join(__dirname, './public/html/todo.html'));
+// app.get('/', (request, response) {
+//   response.setHeader("Access-Control-Allow-Origin", '*')
+//   response.sendFile(path.join(__dirname, './public/html/todo.html'));
+// });
+
+// SERVE URLS TO FRONTEND
+// SERVE URLS TO FRONTEND
+// SERVE URLS TO FRONTEND
+app.get('/', (request, response) => {
+  response.json({ apiUrl: process.env.devUrl });
 });
-
-
 
 // GET LIST OF COMPLETE TASKS
 // GET LIST OF COMPLETE TASKS
